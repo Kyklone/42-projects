@@ -18,9 +18,7 @@ void	ft_putnbr(int n)
 	int		i;
 
 	i = 9;
-	if (n > 2147483647 || n < -2147483648)
-		return ;
-	else if (n == 0)
+	if (n == 0)
 		ft_putchar('0');
 	else if (n < 0)
 	{

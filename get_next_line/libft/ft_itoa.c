@@ -26,9 +26,7 @@ static char	*ft_zero(void)
 static char	*ft_min(void)
 {
 	char	*str;
-	int		i;
 
-	i = 0;
 	if (!(str = (char*)malloc(sizeof(char) * 12)))
 		return (NULL);
 	str[0] = '-';

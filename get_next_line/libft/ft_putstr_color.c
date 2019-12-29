@@ -12,12 +12,15 @@
 
 #include "libft.h"
 
-void	ft_putstr_color(char const *s, char const *color)
+void	ft_putstr_color(char const *s, char const *color, int nl)
 {
 	if (s)
 	{
 		write(1, color, ft_strlen(color));
 		write(1, s, ft_strlen(s));
 		write(1, NC, ft_strlen(NC));
+		if (nl)
+			while (nl-- > 0)
+				write(1, "\n", 1);
 	}
 }

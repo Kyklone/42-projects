@@ -15,19 +15,15 @@
 t_list	*ft_lstpush(t_list *alst, void const *content)
 {
 	t_list			*lst;
-	char			*cont;
 
 	lst = alst;
-	cont = (char *)content;
 	if (!lst)
-	{
-		alst = ft_lstnew(cont, ft_strlen(cont));
-	}
+		alst = ft_lstnew(content, ft_strlen(content));
 	else
 	{
 		while (lst->next)
 			lst = lst->next;
-		lst->next = ft_lstnew(cont, ft_strlen(cont));
+		lst->next = ft_lstnew(content, ft_strlen(content));
 	}
 	return (alst);
 }

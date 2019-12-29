@@ -32,7 +32,7 @@ main1:
 	gcc -o gnl1 $(FLAGS) main_gnl1.c $(BASE) $(LIB)
 	printf "\nContent of test file: \n"
 	printf "${YEL}"
-	cat -e test_1l
+	cat test_1l
 	printf "${NC}\n"
 	./gnl1
 
@@ -40,7 +40,7 @@ main2:
 	gcc -o gnl2 $(FLAGS) main_gnl2.c $(BASE) $(LIB)
 	printf "\nContent of test file: \n"
 	printf "${YEL}"
-	cat -e test_1l_nl
+	cat test_1l_nl
 	printf "${NC}\n"
 	./gnl2
 
@@ -48,7 +48,7 @@ main3:
 	gcc -o gnl3 $(FLAGS) main_gnl3.c $(BASE) $(LIB)
 	printf "\nContent of test file: \n"
 	printf "${YEL}"
-	cat -e test_2l
+	cat test_2l
 	printf "${NC}\n"
 	./gnl3
 
@@ -56,7 +56,7 @@ main4:
 	gcc -o gnl4 $(FLAGS) main_gnl4.c $(BASE) $(LIB)
 	printf "\nContent of test file: \n"
 	printf "${YEL}"
-	cat -e test_2l_nl
+	cat test_2l_nl
 	printf "${NC}\n"
 	./gnl4
 

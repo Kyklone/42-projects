@@ -39,9 +39,10 @@ void			ft_putchar_fd(char c, int fd);
 void			ft_putstr_fd(char const *s, int fd);
 void			ft_putendl_fd(char const *s, int fd);
 void			ft_putnbr_fd(int n, int fd);
-void			ft_putstr_color(char const *s, char const *color);
+void			ft_putstr_color(char const *s, char const *color, int nl);
 size_t			ft_strlen(const char *s);
 size_t			ft_strnlen(const char *s, size_t maxlen);
+char			*ft_replace(char *dst, const char *src, unsigned int left, unsigned int right);
 
 void			ft_bzero(void *s, size_t n);
 void			*ft_memalloc(size_t size);

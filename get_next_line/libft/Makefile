@@ -16,7 +16,7 @@ FILE 	 =	ft_atoi.c ft_itoa.c ft_bzero.c ft_tolower.c ft_toupper.c \
 			ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c \
 			ft_islower.c ft_isupper.c ft_strnlen.c \
 			ft_lstadd.c ft_lstdel.c ft_lstdelone.c ft_lstiter.c ft_lstmap.c ft_lstnew.c \
-			ft_lstpush.c ft_putstr_color.c \
+			ft_lstpush.c ft_putstr_color.c ft_replace \
 	  		ft_memalloc.c ft_memccpy.c ft_memchr.c ft_memcmp.c ft_memcpy.c \
 	  		ft_memdel.c ft_memmove.c ft_memset.c \
 			ft_putchar.c ft_putendl.c ft_putnbr.c ft_putstr.c \
