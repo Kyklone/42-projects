@@ -6,7 +6,7 @@
 /*   By: hkortela <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 13:59:31 by hkortela          #+#    #+#             */
-/*   Updated: 2019/12/28 18:54:13 by hkortela         ###   ########.fr       */
+/*   Updated: 2020/02/13 14:42:35 by hkortela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void			ft_putnbr_fd(int n, int fd);
 void			ft_putstr_color(char const *s, char const *color, int nl);
 size_t			ft_strlen(const char *s);
 size_t			ft_strnlen(const char *s, size_t maxlen);
-char			*ft_replace(char *dst, const char *src, unsigned int left, unsigned int right);
 
 void			ft_bzero(void *s, size_t n);
 void			*ft_memalloc(size_t size);
@@ -100,6 +99,6 @@ void			ft_lstadd(t_list **alst, t_list *new);
 void			ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 t_list			*ft_lstpush(t_list *alst, void const *content);
-char			*ft_lstcat(t_list **alst);
+size_t			ft_lstlen(t_list **alst);
 
 #endif

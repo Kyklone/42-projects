@@ -1,56 +1,103 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hkortela <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/04 20:08:51 by hkortela          #+#    #+#             */
+/*   Updated: 2020/02/17 12:30:37 by hkortela         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-
-
-#include "get_next_line_test.h"
+#include "get_next_line.h"
 #include "libft.h"
 
-int			get_next_line(const int fd, char **line, size_t BUFF)
+static int	ft_ret(int ret, int n, char *s, char *p)
 {
-	int				count = 0;
+	if (s[0] || n)
+		return (1);
+	if (!ret && p)
+		free(p);
+	if (!ret)
+		return (0);
+	return (-1);
+}
+
+static char	*ft_lstconc(t_list *lst)
+{
+	char	*str;
+	t_list	*tmp;
+
+	tmp = lst;
+	if (!(str = (char *)ft_memalloc(ft_lstlen(&lst) + 1)))
+		return (0);
+	while (lst)
+	{
+		ft_strncat(str, lst->content, lst->content_size);
+		lst = lst->next;
+	}
+	while (tmp)
+	{
+		lst = tmp;
+		tmp = tmp->next;
+		free(lst->content);
+		lst->content_size = 0;
+		free(lst);
+	}
+	return (str);
+}
+
+static int	ft_find_nl(t_list *lst, const int fd, char *ptr[], size_t i)
+{
+	t_list	*tmp;
+	char	*s;
+	size_t	len;
+
+	tmp = lst;
+	while (tmp)
+	{
+		//((char *)(tmp->content))[tmp->content_size] = '\0';
+		if (!tmp->next)
+			if ((s = (char *)ft_memchr(tmp->content, '\n', tmp->content_size)))
+			{
+				i = s - (char *)tmp->content;
+				len = tmp->content_size - i;
+				ptr[fd] = ft_strsub(tmp->content, i + 1, len);
+				tmp->content_size = i;
+				//((char *)(tmp->content))[i] = '\0';
+				return (1);
+			}
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
+int			get_next_line(const int fd, char **line)
+{
+	static char		*ptr[4864];
 	int				ret;
-	unsigned int	i;
-	unsigned int	n;
+	int				n;
 	t_list			*lst;
-	unsigned char	*cmp;
 
 	ret = 1;
-	i = 0;
-	n = 0;
-	lst = NULL;
-	// Read file descriptor
-	if ((ret = read(fd, line[count], BUFF)))
+	if ((n = (int)BUFF_SIZE) > 0)
 	{
-		line[count][ret] = '\0';
-		lst = ft_lstpush(lst, line[count]);
+		lst = NULL;
+		if (ptr[fd])
+			lst = ft_lstpush(lst, ptr[fd]);
+		if (ptr[fd])
+			free(ptr[fd]);
+		while (!(n = ft_find_nl(lst, fd, ptr, 0)) && ret > 0)
+		{
+			if (!(ptr[fd] = (char *)ft_memalloc(BUFF_SIZE + 1)))
+				return (0);
+			if ((ret = read(fd, ptr[fd], BUFF_SIZE)))
+				lst = ft_lstpush(lst, ptr[fd]);
+			if (ret)
+				free(ptr[fd]);
+		}
+		*line = ft_lstconc(lst);
 	}
-		if (ret && lst)
-			i = ft_strnlen(lst->content, BUFF);
-		while (lst && !n)
-		{
-			ret = 0;
-			ret += ft_strlen(lst->content);
-			if ((cmp = (unsigned char *)ft_memchr(lst->content, '\n', ft_strlen(lst->content))))
-			{
-				n = cmp - (unsigned char *)lst->content;
-				n += 1;
-				ret -= ft_strlen(lst->content) - n;
-				i -= ret;
-			}
-			lst = lst->next;
-		}
-		/*if (n && ret > 0)
-		{
-			ft_putstr_color("New line position in list element: ", YEL, 0);
-			ft_putstr_color(ft_itoa(n), RED, 2);
-			ft_putstr_color("New line location in the list: ", YEL, 0);
-			ft_putstr_color(ft_itoa(i), GRE, 2);
-		}
-		else
-		{
-			ft_putstr_color("Buffer size was less than the line length", YEL, 2);
-		}*/
-		if (ret > 0 && !n)
-			get_next_line(fd, line, BUFF);
-	count++;
-	return (ret);
+	return (ft_ret(ret, n, *line, ptr[fd]));
 }

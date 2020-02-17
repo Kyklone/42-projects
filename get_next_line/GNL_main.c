@@ -32,7 +32,7 @@ void	ft_print_h(const char *s)
 }
 
 // Function to call gnl as f-pointer. Also writes buffer size and how many bites have been read.
-void	ft_print_gnl(const char *path, int buffer, char **line, int (*f)(int, char **, size_t))
+void	ft_print_gnl(const char *path, int buffer, char **line, int (*f)(int, char **, size_t), int linelen)
 {
 	char	*bor;	
 	size_t	len = ft_strlen(path);
@@ -55,11 +55,15 @@ void	ft_print_gnl(const char *path, int buffer, char **line, int (*f)(int, char 
 	ft_putstr_color(bor, TEA, 2);
 	int	fd = open(path, O_RDONLY);
 	int	z = f(fd, line, buffer);
-	//close(fd);
 	ft_putstr_color(" BUFF_SIZE..", BLU, 0);
 	ft_putstr_color(ft_itoa(buffer), NC, 0);
 	ft_putstr_color("	Reading returned..", BLU, 0);
-	ft_putstr_color(ft_itoa(z), NC, 2);
-	ft_putstr_color(bd, TEA, 3);
+	ft_putstr_color("[ ", NC, 0);
+	if (z == linelen)
+		ft_putstr_color(ft_itoa(z), GRE, 0);
+	else
+		ft_putstr_color(ft_itoa(z), RED, 0);
+	ft_putstr_color(" ]", NC, 1);
+	ft_putstr_color(bd, TEA, 2);
 	close(fd);
 }

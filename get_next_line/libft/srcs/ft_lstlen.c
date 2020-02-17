@@ -1,42 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstcat.c                                        :+:      :+:    :+:   */
+/*   ft_lstlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkortela <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/19 15:26:17 by hkortela          #+#    #+#             */
-/*   Updated: 2019/12/19 16:22:15 by hkortela         ###   ########.fr       */
+/*   Created: 2020/02/13 14:30:03 by hkortela          #+#    #+#             */
+/*   Updated: 2020/02/17 12:35:11 by hkortela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_lstcat(t_list **alst)
+size_t	ft_lstlen(t_list **alst)
 {
+	size_t	n;
 	t_list	*lst;
-	size_t	len;
-	char	*nstr;
 
+	n = 0;
 	lst = *alst;
-	len = 0;
-	while (lst && lst->next)
+	while (lst)
 	{
-		len += ft_strlen((const char *)lst->content);
+		n += lst->content_size;
 		lst = lst->next;
 	}
-	nstr = ft_strnew(len);
-	lst = *alst;
-	while (lst && lst->next)
-	{
-		ft_putendl(lst->content);
-		//ft_strcat(nstr, lst->content);
-		//if (!(ft_strlcat(nstr, lst->content, len) == len))
-		//{
-		//	free(nstr);
-		//	return (NULL);
-		//}
-		lst = lst->next;
-	}
-	return (nstr);
+	return (n);
 }

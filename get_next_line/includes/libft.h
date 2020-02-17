@@ -6,7 +6,7 @@
 /*   By: hkortela <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 13:59:31 by hkortela          #+#    #+#             */
-/*   Updated: 2020/01/29 16:55:46 by hkortela         ###   ########.fr       */
+/*   Updated: 2020/02/04 19:19:06 by hkortela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 # define LIBFT_H
 
-# define RED			"\033[1;31m"
-# define GRE			"\033[1;32m"
+# define RED			"\033[1;32m"
+# define GRE			"\033[1;35m"
 # define BLU			"\033[1;34m"
 # define TEA			"\033[1;36m"
 # define YEL			"\033[1;33m"
@@ -101,6 +101,5 @@ void			ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 t_list			*ft_lstpush(t_list *alst, void const *content);
 char			*ft_lstcat(t_list **alst);
-size_t			ft_lstlen(t_list **alst);
 
 #endif
